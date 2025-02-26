@@ -58,3 +58,6 @@ pip uninstall pytorch
 ```
 pip install torch torchvision torchaudio --index-url https://pypi.jetson-ai-lab.dev/jp6/cu126
 ```
+
+# [Annotation via roboflow]
+- Please refer to roboflow_tutorial.docx
