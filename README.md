@@ -55,6 +55,13 @@ sudo reboot
 ### if the https://pypi.jetson-ai-lab.dev/ has been dead, please change to https://pypi.jetson-ai-lab.io/
 - https://pypi.jetson-ai-lab.io/
 - Ex: CUDA 12.6(cmd: nvcc -V), https://pypi.jetson-ai-lab.io/jp6/cu126
+### if nvcc command not found
+```
+sudo gedit ~/.bashrc
+
+export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64\${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+```
 - Nvidia forum: https://forums.developer.nvidia.com/t/help-me-with-correct-pytorch-and-torchvision-versions-requirement-for-jetpack-6-2-1-orin-super/343688/47
 ```
 pip uninstall torch
