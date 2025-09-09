@@ -54,13 +54,35 @@ sudo reboot
 - Ex: CUDA 12.6(cmd: nvcc -V), https://pypi.jetson-ai-lab.dev/jp6/cu126
 ### if the https://pypi.jetson-ai-lab.dev/ has been dead, please change to https://pypi.jetson-ai-lab.io/
 - https://pypi.jetson-ai-lab.io/
-- Ex: CUDA 12.6(cmd: nvcc -V), https://pypi.jetson-ai-lab.io/jp6/cu126 
+- Ex: CUDA 12.6(cmd: nvcc -V), https://pypi.jetson-ai-lab.io/jp6/cu126
+- Nvidia forum: https://forums.developer.nvidia.com/t/help-me-with-correct-pytorch-and-torchvision-versions-requirement-for-jetpack-6-2-1-orin-super/343688/47
 ```
-pip uninstall pytorch
+pip uninstall torch
 ```
 ```
-pip install torch torchvision torchaudio --index-url https://pypi.jetson-ai-lab.dev/jp6/cu126
+pip install torch torchvision torchaudio --index-url https://pypi.jetson-ai-lab.io/jp6/cu126
+pip3 install --force-reinstall --no-cache-dir -U torch torchvision torchaudio --index-url https://pypi.jetson-ai-lab.io/jp6/cu126
 ```
+### Be careful when you install other packages that can override your previous packages.
+- I recommend always to do this:
+```
+export PIP_INDEX_URL=https://pypi.jetson-ai-lab.io/jp6/cu126
+```
+### Missing cudss link
+```
+wget https://developer.download.nvidia.com/compute/cudss/0.6.0/local_installers/cudss-local-tegra-repo-ubuntu2204-0.6.0_0.6.0-1_arm64.deb
+sudo dpkg -i cudss-local-tegra-repo-ubuntu2204-0.6.0_0.6.0-1_arm64.deb
+sudo cp /var/cudss-local-tegra-repo-ubuntu2204-0.6.0/cudss-*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get -y install cudss
+```
+### Test cudss
+```
+$ python3 -c "import torch; print('torch', torch.__version__, 'built for CUDA', torch.version.cuda)"
+torch 2.8.0 built for CUDA 12.6
+```
+### RuntimeError: TensorRT does not currently build wheels for Tegra systems
+- cannot running in venv, if wanna running on VM, need make a symbol link
 
 # [Annotation via roboflow]
 - Please refer to roboflow_tutorial.docx
